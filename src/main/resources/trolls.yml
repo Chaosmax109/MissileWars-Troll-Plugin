@@ -1,0 +1,314 @@
+# =====================================================================
+#  MissileWars-Troll – trolls.yml
+#  Hier stehen ALLE Trolls. Du kannst sie ändern, löschen oder neue
+#  hinzufügen. Danach: /mw troll reload
+# =====================================================================
+#
+#  Aufbau eines Trolls:
+#
+#  trolls:
+#    meintroll:                 # ID (klein, ohne Leerzeichen) -> /mw troll meintroll <Ziel>
+#      enabled: true            # false = Troll ist aus
+#      name: '&6Mein Troll'     # Anzeigename (Menü + Nachrichten)
+#      icon: TNT                # Item im Menü (Minecraft-Material, Fallbacks mit Komma: 'A, B')
+#      description:             # Beschreibung im Menü
+#        - '&7Was der Troll macht'
+#      duration: 0              # 0 = Sofort-Troll, sonst Standard-Dauer in Sekunden
+#      actions:                 # Was passiert (der Reihe nach)
+#        - 'effect: fake_explosion'
+#
+#  Permission pro Troll:  mwtroll.troll.<id>   (z. B. mwtroll.troll.freeze)
+#  Alle Trolls:           mwtroll.troll.*
+#
+#  --------------------------- AKTIONEN -------------------------------
+#  effect: <name>                  eingebauter Effekt (Liste unten)
+#  sound: <sound> [laut] [höhe]    z. B. 'sound: entity.ghast.scream 1 0.5' (nur das Ziel hört es)
+#  particle: <PARTIKEL> [anzahl]   z. B. 'particle: HEART 20'           (nur das Ziel sieht es)
+#  potion: <EFFEKT> [stufe] [sek]  z. B. 'potion: SLOWNESS 2'  (Stufe 0 = I; ohne sek = Troll-Dauer)
+#  attribute: <speed|jump|size|gravity> <faktor> [sek]   z. B. 'attribute: size 0.5'
+#  velocity: <x> <y> <z>           Spieler wegschleudern (ohne Fallschaden)
+#  nofall: <sekunden>              Fallschaden für X Sekunden aus
+#  message: <text>                 Nachricht an das Ziel
+#  sender-message: <text>          Nachricht an den Troller
+#  title: <titel> | <untertitel>   Titel beim Ziel
+#  actionbar: <text>               Actionbar beim Ziel
+#  broadcast: <text>               Nachricht an alle Spieler
+#  console: <befehl>               Befehl als Konsole
+#  command: <befehl>               Befehl als Ziel-Spieler
+#  give: <MATERIAL> [anzahl]       normales Item geben
+#  rocket: <rakete> [anzahl]       MissileWars-Rakete/Schild/arrow/fireball geben
+#  nextitems: <item1,item2,...>    nächste MissileWars-Items festlegen
+#  delay: <ticks>                  warten (20 Ticks = 1 Sekunde), danach geht's weiter
+#
+#  Platzhalter: %player% (Ziel), %sender% (Troller), %duration% (Sekunden), %troll% (Name)
+#
+#  Eingebaute Effekte für "effect:":
+#   fake_explosion, creeper, launch, lightning, turn, shuffle, drop, jumpscare,
+#   demo, fake_op, cave, drunk, blind, levitate, freeze, spin, tiny, giant,
+#   nojump, snail, turbo, moon, glow, pumpkin, chickens
+# =====================================================================
+
+trolls:
+
+  # ------------------------- Sofort-Trolls -------------------------
+  explosion:
+    name: '&6Fake-Explosion'
+    icon: TNT
+    description: ['&7Knall + Explosion, nur für das Ziel sichtbar.', '&7Kein Schaden.']
+    duration: 0
+    actions:
+      - 'effect: fake_explosion'
+
+  creeper:
+    name: '&6Creeper-Zischen'
+    icon: CREEPER_HEAD
+    description: ['&7Ein Creeper zischt direkt hinter dem Ziel.']
+    duration: 0
+    actions:
+      - 'effect: creeper'
+
+  launch:
+    name: '&6Raketenstart'
+    icon: FIREWORK_ROCKET
+    description: ['&7Schießt das Ziel in die Luft (kein Fallschaden).']
+    duration: 0
+    actions:
+      - 'effect: launch'
+
+  lightning:
+    name: '&6Blitz'
+    icon: LIGHTNING_ROD, BLAZE_ROD
+    description: ['&7Harmloser Blitz schlägt beim Ziel ein.']
+    duration: 0
+    actions:
+      - 'effect: lightning'
+
+  turn:
+    name: '&6Umdrehen'
+    icon: COMPASS
+    description: ['&7Dreht das Ziel um 180 Grad.']
+    duration: 0
+    actions:
+      - 'effect: turn'
+
+  shuffle:
+    name: '&6Inventar mischen'
+    icon: CHEST
+    description: ['&7Mischt Inventar und Hotbar durcheinander.']
+    duration: 0
+    actions:
+      - 'effect: shuffle'
+
+  drop:
+    name: '&6Item fallen lassen'
+    icon: HOPPER
+    description: ['&7Das Item in der Hand fällt auf den Boden.']
+    duration: 0
+    actions:
+      - 'effect: drop'
+
+  jumpscare:
+    name: '&6Jumpscare'
+    icon: PRISMARINE_SHARD
+    description: ['&7Wächter-Fluch mit Geräusch mitten ins Gesicht.']
+    duration: 0
+    actions:
+      - 'effect: jumpscare'
+
+  demo:
+    name: '&6Demo-Bildschirm'
+    icon: PAPER
+    description: ['&7Zeigt den Minecraft-Demo-Hinweis an.']
+    duration: 0
+    actions:
+      - 'effect: demo'
+
+  fakeop:
+    name: '&6Fake-OP'
+    icon: COMMAND_BLOCK
+    description: ['&7Täuschend echte "Made ... a server operator"-Nachricht.']
+    duration: 0
+    actions:
+      - 'effect: fake_op'
+
+  cave:
+    name: '&6Höhlengeräusch'
+    icon: SCULK_SHRIEKER, COAL
+    description: ['&7Gruselige Höhlengeräusche.']
+    duration: 0
+    actions:
+      - 'effect: cave'
+
+  # ----------------------- Trolls mit Dauer ------------------------
+  drunk:
+    name: '&dBetrunken'
+    icon: HONEY_BOTTLE, POTION
+    description: ['&7Übelkeit und Langsamkeit.']
+    duration: 15
+    actions:
+      - 'effect: drunk'
+
+  blind:
+    name: '&dBlind'
+    icon: INK_SAC
+    description: ['&7Blindheit.']
+    duration: 10
+    actions:
+      - 'effect: blind'
+
+  levitate:
+    name: '&dSchweben'
+    icon: FEATHER
+    description: ['&7Ziel schwebt nach oben (kein Fallschaden danach).']
+    duration: 5
+    actions:
+      - 'effect: levitate'
+
+  freeze:
+    name: '&dEinfrieren'
+    icon: ICE
+    description: ['&7Ziel kann nicht laufen (umschauen geht).']
+    duration: 10
+    actions:
+      - 'effect: freeze'
+
+  spin:
+    name: '&dDrehwurm'
+    icon: RECOVERY_COMPASS, COMPASS
+    description: ['&7Ziel dreht sich ständig im Kreis.']
+    duration: 5
+    actions:
+      - 'effect: spin'
+
+  tiny:
+    name: '&dMini'
+    icon: BROWN_MUSHROOM
+    description: ['&7Ziel wird winzig.']
+    duration: 30
+    actions:
+      - 'effect: tiny'
+
+  giant:
+    name: '&dRiese'
+    icon: RED_MUSHROOM
+    description: ['&7Ziel wird riesig.']
+    duration: 20
+    actions:
+      - 'effect: giant'
+
+  nojump:
+    name: '&dSpringen verboten'
+    icon: SLIME_BALL
+    description: ['&7Ziel kann nicht mehr springen.']
+    duration: 20
+    actions:
+      - 'effect: nojump'
+
+  snail:
+    name: '&dSchneckentempo'
+    icon: SOUL_SAND
+    description: ['&7Ziel wird extrem langsam.']
+    duration: 15
+    actions:
+      - 'effect: snail'
+
+  turbo:
+    name: '&dTurbo'
+    icon: SUGAR
+    description: ['&7Ziel wird extrem schnell.']
+    duration: 15
+    actions:
+      - 'effect: turbo'
+
+  moon:
+    name: '&dMondschwerkraft'
+    icon: END_STONE
+    description: ['&7Sehr geringe Schwerkraft.']
+    duration: 20
+    actions:
+      - 'effect: moon'
+
+  glow:
+    name: '&dLeuchten'
+    icon: GLOWSTONE_DUST
+    description: ['&7Ziel leuchtet durch Wände.']
+    duration: 30
+    actions:
+      - 'effect: glow'
+
+  pumpkin:
+    name: '&dKürbiskopf'
+    icon: CARVED_PUMPKIN
+    description: ['&7Setzt dem Ziel einen Kürbis auf.']
+    duration: 20
+    actions:
+      - 'effect: pumpkin'
+
+  chickens:
+    name: '&dHühnerregen'
+    icon: EGG
+    description: ['&7Hühner regnen um das Ziel herum.']
+    duration: 15
+    actions:
+      - 'effect: chickens'
+
+  # ---------------- Beispiele für eigene Trolls ----------------
+  alarm:
+    name: '&cRaketen-Alarm'
+    icon: BELL
+    description: ['&7Fake-Warnung: Rakete im Anflug!']
+    duration: 0
+    actions:
+      - 'title: &c&lACHTUNG! | &eRakete im Anflug!'
+      - 'sound: block.note_block.pling 1 2'
+      - 'delay: 10'
+      - 'sound: block.note_block.pling 1 2'
+      - 'delay: 10'
+      - 'sound: block.note_block.pling 1 2'
+      - 'delay: 30'
+      - 'effect: fake_explosion'
+
+  fakewin:
+    name: '&aFake-Sieg'
+    icon: GOLD_BLOCK
+    description: ['&7Zeigt dem Ziel einen Sieg-Titel...', '&7...der nicht echt ist.']
+    duration: 0
+    actions:
+      - 'title: &a&lSIEG! | &7Dein Team hat gewonnen!'
+      - 'sound: ui.toast.challenge_complete'
+      - 'delay: 60'
+      - 'title: &c&lNÖ. | &7War nur Spaß :)'
+
+  bounce:
+    name: '&eFlummi'
+    icon: SLIME_BLOCK
+    description: ['&7Ziel hüpft dreimal hoch.']
+    duration: 0
+    actions:
+      - 'velocity: 0 1 0'
+      - 'delay: 20'
+      - 'velocity: 0 1 0'
+      - 'delay: 20'
+      - 'velocity: 0 1 0'
+
+  geschenk:
+    name: '&aRaketen-Geschenk'
+    icon: CHEST_MINECART, CHEST
+    description: ['&7Ziel bekommt plötzlich 3 Tomahawks.', '&8(Raketenname an deine Arena anpassen!)']
+    duration: 0
+    actions:
+      - 'rocket: Tomahawk 3'
+      - 'message: &aDu hast ein Geschenk bekommen!'
+
+# Anzeige der Spezial-Trolls im Menü (Funktion ist fest eingebaut)
+special:
+  rocket:
+    enabled: true
+    name: '&cRaketen geben'
+    icon: CREEPER_SPAWN_EGG
+    description: ['&7Gibt dem Ziel bestimmte Raketen,', '&7Schilde, Pfeile oder Feuerbälle.']
+  nextitems:
+    enabled: true
+    name: '&dNächste Items bestimmen'
+    icon: ENDER_EYE
+    description: ['&7Legt fest, welche Items das Ziel', '&7von MissileWars als nächstes bekommt.']

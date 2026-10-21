@@ -1,0 +1,31 @@
+# ==============================================
+#  MissileWars-Troll – Konfiguration
+#  Die Trolls selbst stehen in der trolls.yml
+# ==============================================
+config-version: 3
+
+# Präfix vor allen Nachrichten (& Farbcodes)
+prefix: '&8[&cTroll&8] &7'
+
+# Standard-Dauer in Sekunden, wenn ein Troll in der trolls.yml keine eigene "duration" hat
+default-duration: 10
+
+# Maximal erlaubte Dauer in Sekunden (1800 = 30 Minuten)
+max-duration: 1800
+
+# Soll das Ziel eine Nachricht "Du wurdest getrollt" bekommen?
+notify-target: false
+
+# Soll der Ausführende bei Gruppen (@a, @game, ...) selbst mitgetrollt werden?
+include-self-in-groups: false
+
+# Alle Trolls und Einstellungen zurücksetzen, wenn ein MissileWars-Spiel endet
+reset-on-game-end: true
+
+# Alle Trolls und Einstellungen zurücksetzen, wenn ein Spieler die Arena verlässt
+reset-on-arena-leave: true
+
+# Spieler mit dem Recht "mwtroll.bypass" vor Trolls schützen?
+# ACHTUNG: Wer alle Rechte hat (z. B. "*" in LuckPerms oder Admin-Ränge),
+# hat automatisch auch mwtroll.bypass und wäre dann geschützt.
+bypass-enabled: false

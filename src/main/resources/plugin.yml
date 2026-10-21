@@ -1,0 +1,51 @@
+name: MissileWarsTroll
+version: 1.1.2
+main: de.mwtroll.MWTroll
+api-version: '1.21'
+description: Troll-Add-on für MissileWars (/mw troll)
+depend: [MissileWars]
+
+commands:
+  mwtroll:
+    description: Troll-Menü und Troll-Befehle für MissileWars (auch als /mw troll)
+    usage: /mwtroll help
+    aliases: [mwt]
+
+permissions:
+  mwtroll.*:
+    description: Alle Troll-Rechte
+    default: op
+    children:
+      mwtroll.use: true
+      mwtroll.group: true
+      mwtroll.set: true
+      mwtroll.stop: true
+      mwtroll.reload: true
+      mwtroll.troll.*: true
+  mwtroll.use:
+    description: Menü und Befehl benutzen
+    default: op
+  mwtroll.troll.*:
+    description: Alle Trolls ausführen (einzeln mwtroll.troll.<id>, z. B. mwtroll.troll.freeze)
+    default: op
+  mwtroll.troll.rocket:
+    description: Raketen/Items geben
+    default: op
+  mwtroll.troll.nextitems:
+    description: Nächste MissileWars-Items festlegen
+    default: op
+  mwtroll.group:
+    description: Gruppen trollen (@a, @ingame, @game, @team, @enemy, game:Arena, mehrere Namen)
+    default: op
+  mwtroll.set:
+    description: Dauerhafte Einstellungen setzen (speed, jump, size, gravity, glow, invisible, freeze)
+    default: op
+  mwtroll.stop:
+    description: Trolls und Einstellungen zurücksetzen
+    default: op
+  mwtroll.reload:
+    description: config.yml und trolls.yml neu laden
+    default: op
+  mwtroll.bypass:
+    description: Schutz vor Trolls (nur wenn bypass-enabled in der config.yml an ist)
+    default: false
