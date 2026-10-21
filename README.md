@@ -1,6 +1,7 @@
 # MissileWarsTroll
 
 Ein Troll-Add-on für das Minecraft-Plugin **MissileWars**. Admins können Spieler über ein Menü oder per Befehl trollen. Das geht für einzelne Spieler, ganze Teams oder alle Spieler.
+Das Original MissileWars Plugin könnt ihr hier Finden: https://github.com/RedstoneFuture/missilewars
 
 > Inoffizielles Add-on, nicht von den MissileWars-Entwicklern.
 
